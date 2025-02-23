@@ -1,37 +1,49 @@
-import { createFileRoute } from '@tanstack/solid-router'
-import logo from '../logo.svg'
+import { createQuery } from "@tanstack/solid-query";
+import { createFileRoute } from "@tanstack/solid-router";
+import { Show } from "solid-js";
+import { Board } from "~/strello-components/Board";
+import EditableText from "~/strello-components/EditableText";
+import {
+  boardQueries,
+  useUpdateBoardMutation,
+} from "~/strello-components/queries";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: App,
-})
+  // @ts-expect-error
+  head: ({ loaderData }) => ({
+    title: `Strello`,
+  }),
+});
 
 function App() {
+  const boardQuery = createQuery(boardQueries.detail);
+
+  const updateBoardNameMutation = useUpdateBoardMutation();
+
   return (
-    <main class="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)] text-center">
-      <img
-        src={logo}
-        class="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-        alt="logo"
-      />
-      <p>
-        Edit <code>src/routes/index.tsx</code> and save to reload.
-      </p>
-      <a
-        class="text-[#61dafb] hover:underline"
-        href="https://solidjs.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn Solid
-      </a>
-      <a
-        class="text-[#61dafb] hover:underline"
-        href="https://tanstack.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn TanStack
-      </a>
-    </main>
-  )
+    <Show when={boardQuery.data}>
+      {(board) => (
+        <main
+          class="w-full p-8 space-y-2"
+          style={{ "background-color": board().board.color }}
+        >
+          <h1 class="mb-4">
+            <EditableText
+              text={
+                updateBoardNameMutation.status === "pending"
+                  ? updateBoardNameMutation.variables.title
+                  : board().board.title
+              }
+              saveAction={(title) => updateBoardNameMutation.mutate({ title })}
+            />
+          </h1>
+
+          <div>
+            <Board board={board()} />
+          </div>
+        </main>
+      )}
+    </Show>
+  );
 }

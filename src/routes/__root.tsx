@@ -1,18 +1,16 @@
-import { Outlet, createRootRouteWithContext } from '@tanstack/solid-router'
+import { Outlet, createRootRouteWithContext } from "@tanstack/solid-router";
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import { QueryClient, QueryClientProvider } from '@tanstack/solid-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 
-import { SolidQueryDevtools } from '@tanstack/solid-query-devtools'
+import { SolidQueryDevtools } from "@tanstack/solid-query-devtools";
 
-import '@fontsource/inter'
+import Header from "../components/Header";
 
-import Header from '../components/Header'
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 export const Route = createRootRouteWithContext<{}>()({
   component: RootComponent,
-})
+});
 
 function RootComponent() {
   return (
@@ -25,5 +23,5 @@ function RootComponent() {
         <SolidQueryDevtools buttonPosition="bottom-right" />
       </QueryClientProvider>
     </>
-  )
+  );
 }

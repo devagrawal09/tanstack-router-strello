@@ -1,15 +1,16 @@
-import { RouterProvider, createRouter } from '@tanstack/solid-router'
-import { render } from 'solid-js/web'
-import * as Sentry from '@sentry/solid'
+import { RouterProvider, createRouter } from "@tanstack/solid-router";
+import { render } from "solid-js/web";
+import * as Sentry from "@sentry/solid";
 
-import { routeTree } from './routeTree.gen'
-import './styles.css'
+import { routeTree } from "./routeTree.gen";
+import "./styles.css";
+import "virtual:uno.css";
 
 const router = createRouter({
   routeTree,
-  defaultPreload: 'intent',
+  defaultPreload: "intent",
   scrollRestoration: true,
-})
+});
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -21,11 +22,11 @@ Sentry.init({
   tracesSampleRate: 1.0,
   replaysSessionSampleRate: 1.0, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
   replaysOnErrorSampleRate: 1.0,
-})
+});
 
-declare module '@tanstack/solid-router' {
+declare module "@tanstack/solid-router" {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }
 
@@ -34,8 +35,8 @@ function App() {
     <>
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-const rootElement = document.getElementById('app')!
-render(() => <App />, rootElement!)
+const rootElement = document.getElementById("app")!;
+render(() => <App />, rootElement!);
