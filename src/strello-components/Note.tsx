@@ -43,7 +43,7 @@ export function Note(props: { note: Note; previous?: Note; next?: Note }) {
           acceptDrop() === "bottom" ? "2px solid red" : "2px solid transparent",
       }}
       draggable="true"
-      class="card card-side px-1 py-2 w-full bg-slate-200 text-lg flex justify-between items-center space-x-1"
+      class="px-1 py-2 w-full bg-slate-200 text-lg flex justify-between items-center space-x-1 "
       onDragStart={(e) => {
         e.dataTransfer?.setData(DragTypes.Note, props.note.id.toString());
       }}
@@ -115,10 +115,11 @@ export function Note(props: { note: Note; previous?: Note; next?: Note }) {
       }}
     >
       <div>
-        <RiEditorDraggable size={6} class="cursor-move" />
+        <RiEditorDraggable size={25} class="cursor-move" />
       </div>
       <textarea
-        class="textarea textarea-ghost text-lg w-full"
+        class="text-lg w-full
+        bg-slate-300 text-black p-2 rounded"
         ref={input}
         style={{
           resize: "none",
@@ -186,16 +187,19 @@ export function AddNote(props: {
                 inputRef = el;
                 setTimeout(() => requestAnimationFrame(() => void el.focus()));
               }}
-              class="textarea dark:text-white"
+              class="text-white bg-black p-2 w-full rounded"
               placeholder="Add a Note"
               required
             />
             <div class="flex justify-between">
-              <button class="btn btn-success" type="submit">
+              <button
+                class="bg-green-700 text-gray-100 flex justify-center items-center py-2 px-4 gap-2 rounded cursor-pointer hover:bg-gray-900 hover:text-white"
+                type="submit"
+              >
                 Add
               </button>
               <button
-                class="btn btn-error"
+                class="bg-red-700 text-gray-100 flex justify-center items-center py-2 px-4 gap-2 rounded cursor-pointer hover:bg-gray-900 hover:text-white"
                 type="reset"
                 onClick={() => setActive(false)}
               >
@@ -205,8 +209,11 @@ export function AddNote(props: {
           </form>
         </Match>
         <Match when={!active()}>
-          <button class="btn w-full" onClick={() => setActive(true)}>
-            <BsPlus size={10} /> Add a card
+          <button
+            class="w-full bg-gray-800 text-gray-100 flex justify-center items-center p-2 gap-2 rounded cursor-pointer hover:bg-gray-900 hover:text-white"
+            onClick={() => setActive(true)}
+          >
+            <BsPlus size={25} /> Add a card
           </button>
         </Match>
       </Switch>

@@ -12,47 +12,12 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
-import { Route as DemoFormImport } from './routes/demo.form'
-import { Route as DemoStorePage2Import } from './routes/demo.store.page2'
-import { Route as DemoStorePage1Import } from './routes/demo.store.page1'
-import { Route as DemoSentryBadEventHandlerImport } from './routes/demo.sentry.bad-event-handler'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DemoTanstackQueryRoute = DemoTanstackQueryImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DemoFormRoute = DemoFormImport.update({
-  id: '/demo/form',
-  path: '/demo/form',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DemoStorePage2Route = DemoStorePage2Import.update({
-  id: '/demo/store/page2',
-  path: '/demo/store/page2',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DemoStorePage1Route = DemoStorePage1Import.update({
-  id: '/demo/store/page1',
-  path: '/demo/store/page1',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DemoSentryBadEventHandlerRoute = DemoSentryBadEventHandlerImport.update({
-  id: '/demo/sentry/bad-event-handler',
-  path: '/demo/sentry/bad-event-handler',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,41 +32,6 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/demo/form': {
-      id: '/demo/form'
-      path: '/demo/form'
-      fullPath: '/demo/form'
-      preLoaderRoute: typeof DemoFormImport
-      parentRoute: typeof rootRoute
-    }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryImport
-      parentRoute: typeof rootRoute
-    }
-    '/demo/sentry/bad-event-handler': {
-      id: '/demo/sentry/bad-event-handler'
-      path: '/demo/sentry/bad-event-handler'
-      fullPath: '/demo/sentry/bad-event-handler'
-      preLoaderRoute: typeof DemoSentryBadEventHandlerImport
-      parentRoute: typeof rootRoute
-    }
-    '/demo/store/page1': {
-      id: '/demo/store/page1'
-      path: '/demo/store/page1'
-      fullPath: '/demo/store/page1'
-      preLoaderRoute: typeof DemoStorePage1Import
-      parentRoute: typeof rootRoute
-    }
-    '/demo/store/page2': {
-      id: '/demo/store/page2'
-      path: '/demo/store/page2'
-      fullPath: '/demo/store/page2'
-      preLoaderRoute: typeof DemoStorePage2Import
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -109,76 +39,32 @@ declare module '@tanstack/solid-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demo/form': typeof DemoFormRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/sentry/bad-event-handler': typeof DemoSentryBadEventHandlerRoute
-  '/demo/store/page1': typeof DemoStorePage1Route
-  '/demo/store/page2': typeof DemoStorePage2Route
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo/form': typeof DemoFormRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/sentry/bad-event-handler': typeof DemoSentryBadEventHandlerRoute
-  '/demo/store/page1': typeof DemoStorePage1Route
-  '/demo/store/page2': typeof DemoStorePage2Route
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/demo/form': typeof DemoFormRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/sentry/bad-event-handler': typeof DemoSentryBadEventHandlerRoute
-  '/demo/store/page1': typeof DemoStorePage1Route
-  '/demo/store/page2': typeof DemoStorePage2Route
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/demo/form'
-    | '/demo/tanstack-query'
-    | '/demo/sentry/bad-event-handler'
-    | '/demo/store/page1'
-    | '/demo/store/page2'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/demo/form'
-    | '/demo/tanstack-query'
-    | '/demo/sentry/bad-event-handler'
-    | '/demo/store/page1'
-    | '/demo/store/page2'
-  id:
-    | '__root__'
-    | '/'
-    | '/demo/form'
-    | '/demo/tanstack-query'
-    | '/demo/sentry/bad-event-handler'
-    | '/demo/store/page1'
-    | '/demo/store/page2'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DemoFormRoute: typeof DemoFormRoute
-  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
-  DemoSentryBadEventHandlerRoute: typeof DemoSentryBadEventHandlerRoute
-  DemoStorePage1Route: typeof DemoStorePage1Route
-  DemoStorePage2Route: typeof DemoStorePage2Route
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DemoFormRoute: DemoFormRoute,
-  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
-  DemoSentryBadEventHandlerRoute: DemoSentryBadEventHandlerRoute,
-  DemoStorePage1Route: DemoStorePage1Route,
-  DemoStorePage2Route: DemoStorePage2Route,
 }
 
 export const routeTree = rootRoute

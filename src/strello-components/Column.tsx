@@ -85,7 +85,7 @@ export function Column(props: { column: Column; board: Board; notes: Note[] }) {
     >
       <div class="card card-side flex items-center bg-slate-100 px-2 py-2 mb-2 space-x-1">
         <div>
-          <RiEditorDraggable size={6} class="cursor-move" />
+          <RiEditorDraggable size={25} class="cursor-move" />
         </div>
         <input
           class="input input-ghost text-2xl font-bold w-full"
@@ -104,7 +104,7 @@ export function Column(props: { column: Column; board: Board; notes: Note[] }) {
           }}
         />
         <button
-          class="btn btn-ghost btn-sm btn-circle"
+          class="rounded-full cursor-pointer hover:bg-gray-200 p-2"
           onClick={() => deleteAction({ id: props.column.id })}
         >
           <BsTrash />

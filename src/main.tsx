@@ -4,7 +4,6 @@ import * as Sentry from "@sentry/solid";
 
 import { routeTree } from "./routeTree.gen";
 import "./styles.css";
-import "virtual:uno.css";
 
 const router = createRouter({
   routeTree,

@@ -207,7 +207,7 @@ export function useMoveCardMutation() {
           ? {
               ...board,
               notes: board.notes.map((note) => {
-                if (note.column === variables.id) {
+                if (note.id === variables.id) {
                   return {
                     ...note,
                     ...variables,
